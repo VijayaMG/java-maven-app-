@@ -8,15 +8,7 @@ pipeline {
 
                 steps {
 
-                     sh 'echo test'
-
-                     sh '''
-
-                          echo "multi line"
-
-                          ls -lrt
-
-                     '''
+                     sh 'mvn -B -DskipTests clean install'
                   }
 
              }
