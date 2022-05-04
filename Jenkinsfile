@@ -4,7 +4,7 @@ pipeline {
 
         stages {
 
-            stage ('Bulid') {
+            stage ('Build') {
 
                 steps {
 
