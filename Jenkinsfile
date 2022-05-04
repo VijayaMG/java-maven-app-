@@ -1,36 +1,27 @@
 pipeline {
-
-        agent any
-
-        stages {
-
-            stage ('Build') {
-
-                steps {
-
-                     sh 'mvn -B DskipTests clean install'
-                  }
-
-             }
-            
-             stage('Test') {
-            
-                steps {
-             
-                    sh 'mvn test'
-             }
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
             post {
-
-                 always { 
-                     
+                always {
                     junit 'target/surefire-reports/*.xml'
-
                 }
-
-             }  
-
-          } 
-
-       }
-
-  } 
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh './scripts/deliver.sh'
+            }
+        }
+    }
+}
+            
+              
